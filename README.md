@@ -17,7 +17,7 @@ Almost there, you need to add your token to `.env`, to get token [MSG4wrd.io](ht
 
 > MSG4wrdIO_TOKEN=YOUR-TOKEN-HERE
 
-To see if the MSG4wrd.io was installed success, open your browser, then access this
+To see if the MSG4wrd.io was installed successfully, open your browser, then access this:
 
 > http://your-hostname/msg4wrd-io or http://localhost:8000/msg4wrd-io
 
