@@ -1,7 +1,7 @@
 ## About MSG4wrd-io
 MSG4wrd is an SMS Gateway and SMS Message Forwarder API, formerly PTXT4wrd.
 
-Back from 2010 to 2012, in the Philippines, we don't have text to all networks. Our promos available back then is unlimited text to the same networks. (SMART to SMART or GLOBE to GLOBE Only)
+Back from 2005 to 2012, in the Philippines, we don't have text to all networks. Our promos available back then is unlimited text to the same networks. (SMART to SMART or GLOBE to GLOBE Only)
 
 PTXT4wrd was invented to solve the text to all networks. You can text to the same network and forward your message to other networks.
 
