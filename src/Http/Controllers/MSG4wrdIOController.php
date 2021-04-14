@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class MSG4wrdIOController extends Controller
 {
     public static $token;
-    public static $url = "https://outbound.msg4wrd.io";
+    public static $url = "http://outbound.msg4wrd.io";
     // public static $url = "http://localhost:8011";
 
     public function ShowStatus(Request $requst) {
