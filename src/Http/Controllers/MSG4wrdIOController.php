@@ -23,7 +23,7 @@ class MSG4wrdIOController extends Controller
         return $this->SendMessage($mobile, "This is a sample SMS Message", ["sendername" => "Default", "priority" => 0, "local" => 1]);
     }
 
-    public function SendMessage($mobile, $message, $option = ["sendername" => "Default", "priority" => 0, "local" => 0]) {
+    public function SendMessage($mobile, $message, $options = ["sendername" => "Default", "priority" => 0, "local" => 0]) {
 
         if(strlen($mobile) == 12) {
             $country = substr($mobile, 0, 2);
@@ -49,9 +49,9 @@ class MSG4wrdIOController extends Controller
         $parameters = [
             'mobile' => $mobile,
             'message' => $message,
-            'sendername' => $option["sendername"],
-            'priority' => $option["priority"],
-            'local' => $option["local"]
+            'sendername' => $options["sendername"],
+            'priority' => $options["priority"],
+            'local' => $options["local"]
         ];
 
         $res = $this->PhpCurl($parameters);
