@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>KPAEngine v1</title>
+    <title>KPAWord/MSG4wrd-IO | Test Page</title>
     <style>
         body {
             margin: 0;
@@ -26,7 +26,7 @@
 
 <body>
     <div>
-        <img src='https://msg4wrd.io/images/Infinity211px.gif' alt='It' s working...' />
+        <img src="https://msg4wrd.io/images/Infinity211px.gif" alt="It's working..." />
         <h3>Server is running!</h3>
     </div>
 </body>
