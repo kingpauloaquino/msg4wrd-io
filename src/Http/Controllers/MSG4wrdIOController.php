@@ -9,20 +9,18 @@ class MSG4wrdIOController extends Controller
 {
     public static $token;
     public static $url = "http://outbound.msg4wrd.io";
-    // public static $url = "http://localhost:8011";
 
-    public function ShowStatus(Request $requst) {
-        return view('msg4wrd-io::status');
-    }
-
-    public function SampleMessage($token, Request $requst)
+    public function SampleMessage(Request $requst)
     {
-        MSG4wrdIOController::$token = $token;
+        if(!IsSet($requst->mobile)) {
+            return ["status" => 401, "message" => "US and PH number are allowed to send message."];
+        }
+
         $mobile = $requst->mobile;
-        if (!str_contains($mobile, '+')) {
+        if (!str_contains($requst->mobile, '+')) {
             $mobile = "+" . $requst->mobile;
         }
-        return $this->SendMessage($mobile, "Yeah", ["sendername" => "Default", "priority" => 0, "local" => 1]);
+        return $this->SendMessage($mobile, "This is a sample SMS Message", ["sendername" => "Default", "priority" => 0, "local" => 1]);
     }
 
     public function SendMessage($mobile, $message, $option = ["sendername" => "Default", "priority" => 0, "local" => 0]) {
@@ -64,13 +62,16 @@ class MSG4wrdIOController extends Controller
     public function PhpCurl($parameters)
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, MSG4wrdIOController::$url . '/api/v1/messages/' . MSG4wrdIOController::$token);
+
+        $url = config('msg4wrdio.domain');
+        $token = config('msg4wrdio.token');
+
+        curl_setopt($ch, CURLOPT_URL, $url . '/api/v1/messages/' . $token);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($parameters));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $output = curl_exec($ch);
         curl_close($ch);
-
         return json_decode($output, true);
     }
 }
