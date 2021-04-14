@@ -41,7 +41,6 @@ use KPAWork\MSG4wrdIO\Http\Controllers\MSG4wrdIOController;
 
 class SMSController extends Controller
 {
-
     // $option = [
     //     "sendername" => "Default|MSG4wrd|YourBrandID", 
     //     "priority" => 0|1, 
@@ -49,30 +48,30 @@ class SMSController extends Controller
     // ]
 
     // sendername => Default = Typical Number or Simbased or What is available
-    // sendername => MSG4wrd = This will charge you x2 of your credits
+    // sendername => MSG4wrd = This will charge you more from your credits
     // sendername => YourBrandID = You can have your own brand id, i.e.: GOOGLESMS, YAHOOMSG
 
     // priority => 0 = Normal
-    // priority => 1 = High - This will charge you x2 of your credits
+    // priority => 1 = High - This will charge you more
 
     // local => 0 = Philippines Only
-    // local => 1 = US, Canada, and Philippines Only - This will charge you x2 of your credits
+    // local => 1 = US, Canada, and Philippines Only - This will charge you more
 
     public function SMSSendToPhilippines() {
         $msg4wrd = new MSG4wrdIOController();
 
-        $option = ["sendername" => "Default", "priority" => 0, "local" => 0]
+        $options = ["sendername" => "Default", "priority" => 0, "local" => 0]
 
-        $res = $msg4wrd->SendMessage("US-PH-Number-Here", "Your-Message-Here", $option);
+        $res = $msg4wrd->SendMessage("US-PH-Number-Here", "Your-Message-Here", $options);
         return $res;
     }
 
     public function SMSSendToUSCAPH() {
         $msg4wrd = new MSG4wrdIOController();
 
-        $option = ["sendername" => "Default", "priority" => 0, "local" => 1]
+        $options = ["sendername" => "Default", "priority" => 0, "local" => 1]
 
-        $res = $msg4wrd->SendMessage("US-CA-Number-Here", "Your-Message-Here", $option);
+        $res = $msg4wrd->SendMessage("US-CA-Number-Here", "Your-Message-Here", $options);
         return $res;
     }
 }
