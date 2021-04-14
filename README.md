@@ -16,3 +16,15 @@ Then, it would be best if you published the vendor to generate a config file `co
 Almost there, you need to add your token to `config/msg4wrdio.php`
 
     'token' => env('MSG4wrdIO_TOKEN', 'YOUR-TOKEN-HERE'),
+
+To see if the MSG4wrd.io was installed success, open your browser, then access this
+
+	http://[your-host-name]/msg4wrd-io
+	
+	http://localhost:8000/msg4wrd-io
+
+To check if the MSG4wrd.io will send an SMS message, do this
+
+	http://localhost:8000/msg4wrd-io/send-message?mobile=your-mobile-here 
+
+Note: The mobile number should include the country code. I.e., +63 or +1
