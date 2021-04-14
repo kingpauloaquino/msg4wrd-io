@@ -7,7 +7,7 @@ PTXT4wrd was invented to solve the text to all networks. You can text to the sam
 
 Example command for sending a message to other networks:
 
-> PTXT<space>OtherNetworkNumber<space>YourMessage then send to Gateway.
+> PTXT{space}OtherNetworkNumber{space}YourMessage then send to Gateway.
 
 Gateways - SMART / GLOBE / SUN
 If you are smart, you will use SMART Gateway, identical to the other networks.
