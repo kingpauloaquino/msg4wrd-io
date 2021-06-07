@@ -3,16 +3,17 @@
 namespace KPAWork\MSG4wrdIO\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 
 class MSG4wrdIOController extends Controller
 {
     public static $token;
-    public static $url = "http://outbound.msg4wrd.io";
+    public static $url = "https://outbound.msg4wrd.io";
 
     public function SampleMessage(Request $requst)
     {
-        if(!IsSet($requst->mobile)) {
+        if (!isset($requst->mobile)) {
             return ["status" => 401, "message" => "US and PH number are allowed to send message."];
         }
 
@@ -20,25 +21,31 @@ class MSG4wrdIOController extends Controller
         if (!str_contains($requst->mobile, '+')) {
             $mobile = "+" . $requst->mobile;
         }
-        return $this->SendMessage($mobile, "This is a sample SMS Message", ["sendername" => "Default", "priority" => 0, "local" => 1]);
+
+        $country = config('msg4wrdio.country');
+
+        $local = 1;
+        if ($country == "PH") {
+            $local = 0;
+        }
+
+        return $this->SendMessage($mobile, "This is a sample SMS Message", ["sendername" => "Default", "priority" => 0, "local" => $local]);
     }
 
-    public function SendMessage($mobile, $message, $options = ["sendername" => "Default", "priority" => 0, "local" => 0]) {
+    public function SendMessage($mobile, $message, $option = ["sendername" => "Default", "priority" => 0, "local" => 0])
+    {
 
-        if(strlen($mobile) == 12) {
+        if (strlen($mobile) == 12) {
             $country = substr($mobile, 0, 2);
             if ($country != "+1") {
                 return ["status" => 401, "message" => "US and PH number are allowed to send message."];
             }
-        }
-
-        else if (strlen($mobile) == 13) {
+        } else if (strlen($mobile) == 13) {
             $country = substr($mobile, 0, 3);
             if ($country != "+63") {
                 return ["status" => 402, "message" => "US and PH number are allowed to send message."];
             }
-        }
-        else {
+        } else {
             return ["status" => 403, "message" => "Please enter a valid US/PH Mobile number."];
         }
 
@@ -49,14 +56,14 @@ class MSG4wrdIOController extends Controller
         $parameters = [
             'mobile' => $mobile,
             'message' => $message,
-            'sendername' => $options["sendername"],
-            'priority' => $options["priority"],
-            'local' => $options["local"]
+            'sendername' => $option["sendername"],
+            'priority' => $option["priority"],
+            'local' => $option["local"]
         ];
 
-        $res = $this->PhpCurl($parameters);
+        $response = $this->PhpCurl($parameters);
 
-        return $res;
+        return $response;
     }
 
     public function PhpCurl($parameters)
