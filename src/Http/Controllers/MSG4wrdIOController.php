@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class MSG4wrdIOController extends Controller
 {
     public static $token;
-    public static $url = "https://outbound.msg4wrd.io";
+    public static $url = "https://msg4wrd.io";
 
     public function SampleMessage(Request $requst)
     {
@@ -24,17 +24,13 @@ class MSG4wrdIOController extends Controller
 
         $country = config('msg4wrdio.country');
 
-        $local = 1;
-        if ($country == "PH") {
-            $local = 0;
-        }
+        $local = $country == "PH" ? 0 : 1;
 
-        return $this->SendMessage($mobile, "This is a sample SMS Message", ["sendername" => "Default", "priority" => 0, "local" => $local]);
+        return $this->SendMessage($mobile, "This is a sample SMS Message", ["sendername" => "msg4wrd", "priority" => 0, "local" => $local]);
     }
 
-    public function SendMessage($mobile, $message, $option = ["sendername" => "Default", "priority" => 0, "local" => 0])
+    public function SendMessage($mobile, $message, $option = ["sendername" => "default", "priority" => 0, "local" => 0])
     {
-
         if (strlen($mobile) == 12) {
             $country = substr($mobile, 0, 2);
             if ($country != "+1") {
@@ -73,9 +69,17 @@ class MSG4wrdIOController extends Controller
         $url = config('msg4wrdio.domain');
         $token = config('msg4wrdio.token');
 
-        curl_setopt($ch, CURLOPT_URL, $url . '/api/v1/messages/' . $token);
+        $headers = array(
+            'Content-Type: application/json',
+            'Accept: application/json',
+            'Authorization: Bearer ' . $token
+        );
+
+        $postdata = json_encode($parameters);
+        curl_setopt($ch, CURLOPT_URL, $url . '/api/v2/sms');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($parameters));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $output = curl_exec($ch);
         curl_close($ch);

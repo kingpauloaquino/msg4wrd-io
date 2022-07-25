@@ -2,7 +2,10 @@
 <html>
 
 <head>
-    <title>KPAWord/MSG4wrd-IO | Test Page</title>
+    <title>MSG4wrd.io</title>
+    <link rel="apple-touch-icon" href="https://msg4wrd.io/images/kpa-logo-128px-black.png">
+    <link rel="shortcut icon" type="image/png" href="https://msg4wrd.io/images/kpa-logo-128px-black.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         body {
             margin: 0;
@@ -26,7 +29,9 @@
 
 <body>
     <div>
-        <img src="https://msg4wrd.io/images/Infinity211px.gif" alt="It's working..." />
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
         <h3>Server is running!</h3>
     </div>
 </body>
